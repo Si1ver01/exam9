@@ -8,7 +8,10 @@ export const ERORR = "ERORR";
 
 export const getContact = res => ({ type: GET_CONTACT, payload: res });
 export const addContact = contact => ({ type: ADD_CONTACT, payload: contact });
-export const editContact = contact => ({type: EDIT_CONTACT, payload: contact});
+export const editContact = contact => ({
+  type: EDIT_CONTACT,
+  payload: contact
+});
 export const removeContact = id => ({ type: REMOVE_CONTACT, payload: id });
 
 export const setLoading = () => ({ type: LOADING });

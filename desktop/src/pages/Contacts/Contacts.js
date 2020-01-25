@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  requestContact
+  requestContact,
+  requestRemoveContact
 } from "../../store/actions/actions";
 import Preloader from "../../components/Preloader/Preloader";
 import Modal from "../../components/Modal/Modal";
@@ -39,7 +40,10 @@ const Contacts = () => {
     setShowModal(true);
   };
 
-
+  const deleteContact = async id => {
+    await dispatch(requestRemoveContact(id));
+    setShowModal(false);
+  };
 
   return (
     <div className="container">
@@ -47,6 +51,7 @@ const Contacts = () => {
         <Modal
           contact={contactInfo}
           closeModal={() => setShowModal(false)}
+          deleteHandler={deleteContact}
         />
       )}
       <div className="row">

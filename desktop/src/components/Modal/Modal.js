@@ -17,7 +17,7 @@ const Modal = ({ contact, closeModal, deleteHandler }) => {
               </button>
             </div>
             <div className="col-6">
-              <img className="img-thumbnail card-img" src={contact.photo} alt=''/>
+              <img className="img-thumbnail card-img" src={contact.photo} alt="" />
             </div>
             <div className="col-6 flex-column d-flex ">
               <h2 className="border-bottom pb-1">{contact.name}</h2>

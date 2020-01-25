@@ -7,7 +7,7 @@ const Card = ({ photo, name, clickHandler }) => {
       <div className="card mb-3 Card">
         <div className="row no-gutters ">
           <div className="col-md-4">
-            <img src={photo} className="card-img img-thumbnail" alt="" />
+            <img src={photo} className="card-img img-thumbnail" alt="..." />
           </div>
           <div className="col-md-8 d-flex align-items-center">
             <div className="card-body">

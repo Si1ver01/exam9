@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Preloader from "../Preloader/Preloader";
+import { requestEditContact, sendContact } from "../../store/actions/actions";
+import { Link, useHistory } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 const Form = ({ id }) => {
   const initialState = {
@@ -9,6 +13,28 @@ const Form = ({ id }) => {
     photo: ""
   };
   const [form, setForm] = useState(initialState);
+  const [{ response, fetchLoading }, doFetch] = useFetch();
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const loading = useSelector(state => state.loading);
+  const contacts = useSelector(state => state.contacts);
+
+  useEffect(() => {
+    console.log("useEffect in Form !!!!doFetch");
+    if (id) {
+      doFetch(`https://ddanshin-af25f.firebaseio.com/contacts/${id}.json`);
+    }
+  }, [doFetch, id]);
+
+  useEffect(() => {
+    console.log("Use effect in Form, proverka na response id ");
+    if (response && id) {
+      const index = contacts.findIndex(el => el.id === id);
+      const { name, phone, email, photo } = contacts[index];
+      setForm({ name, phone, email, photo });
+    }
+  }, [id, response, contacts]);
 
   const inputHandler = e => {
     const name = e.target.id;
@@ -16,10 +42,27 @@ const Form = ({ id }) => {
     setForm({ ...form, [name]: value });
   };
 
+  const submitHandler = async e => {
+    e.preventDefault();
+    if (id) {
+      await dispatch(requestEditContact({ ...form, id }));
+    } else {
+      await dispatch(sendContact(form));
+    }
+    setForm(initialState);
+    history.push("/");
+  };
+
+  if (loading || fetchLoading) {
+    return <Preloader />;
+  }
+
+  console.log("Log v forme");
+
   return (
     <div className="row">
       <div className="col-6 offset-3 p-3 border rounded">
-        <form>
+        <form onSubmit={submitHandler}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input

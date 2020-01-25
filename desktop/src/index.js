@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
-import rootReducer from "./store/reducer/rootReducer";
 import thunk from "redux-thunk";
-import { BrowserRouter } from "react-router-dom";
+import rootReducer from "./store/reducer/rootReducer";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
