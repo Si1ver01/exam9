@@ -21,14 +21,12 @@ const Form = ({ id }) => {
   const contacts = useSelector(state => state.contacts);
 
   useEffect(() => {
-    console.log("useEffect in Form !!!!doFetch");
     if (id) {
       doFetch(`https://ddanshin-af25f.firebaseio.com/contacts/${id}.json`);
     }
   }, [doFetch, id]);
 
   useEffect(() => {
-    console.log("Use effect in Form, proverka na response id ");
     if (response && id) {
       const index = contacts.findIndex(el => el.id === id);
       const { name, phone, email, photo } = contacts[index];
@@ -56,8 +54,6 @@ const Form = ({ id }) => {
   if (loading || fetchLoading) {
     return <Preloader />;
   }
-
-  console.log("Log v forme");
 
   return (
     <div className="row">
