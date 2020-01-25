@@ -1,0 +1,9 @@
+.Card {
+  transition: 0.3s ease-in;
+  &:hover{
+    background: rgba(204, 204, 204, 0.35);
+    border: 1px solid #2BBBAD;
+    cursor: pointer;
+  }
+}
+
