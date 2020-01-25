@@ -4,6 +4,7 @@ import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import TopBar from "./src/components/TopBar";
+import ContactList from "./src/components/ContactList";
 
 const App = () => {
   const [isReady, setIsReady] = React.useState(false);
@@ -27,6 +28,7 @@ const App = () => {
   return (
     <Container>
       <TopBar />
+      <ContactList />
     </Container>
   );
 };
